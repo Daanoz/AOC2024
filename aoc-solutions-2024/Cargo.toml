@@ -1,0 +1,19 @@
+[package]
+name = "aoc-solutions-2024"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+repository.workspace = true
+license.workspace = true
+
+[dependencies]
+aoc-core = { path = "../aoc-core", default-features = false}
+aoc-bevy-render = { path = "../aoc-bevy-render", optional = true}
+clap = { version = "4.5.21", features = ["derive"] }
+
+[build-dependencies]
+aoc-core = { path = "../aoc-core" }
+
+[features]
+default = []
+render = ["aoc-bevy-render", "aoc-core/render"]
