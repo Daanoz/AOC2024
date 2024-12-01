@@ -1,0 +1,11 @@
+[package]
+name = "aoc-bevy-render"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+repository.workspace = true
+license.workspace = true
+
+[dependencies]
+aoc-core = { path = "../aoc-core" }
+bevy = "0.14.2"
