@@ -1,0 +1,13 @@
+[package]
+name = "aoc-procmacro-internals"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+repository.workspace = true
+license.workspace = true
+
+[dependencies]
+html2md-rs = "0.10.0"
+lazy_static = "1"
+regex = "1"
+reqwest = { version="0.12.9", features = ["blocking"]}
