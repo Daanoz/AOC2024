@@ -8,6 +8,8 @@ mod solution_wrapper;
 pub use solution_wrapper::*;
 mod timer;
 
+pub mod collections;
+
 extern crate aoc_procmacro;
 pub use aoc_procmacro::{aoc, aoc_puzzle};
 pub use aoc_procmacro_internals::public::*;
