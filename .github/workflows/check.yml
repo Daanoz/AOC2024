@@ -1,0 +1,28 @@
+name: check
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  CARGO_TERM_COLOR: always
+
+concurrency:
+  group: ${{ github.ref }}-check
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: Check ✅
+    runs-on: ubuntu-latest
+    container: rust:1.82
+    env:
+      CI: true
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Build
+        run: cargo build --package aoc-solutions-2024
+      - name: Test
+        run: cargo test --package aoc-solutions-2024

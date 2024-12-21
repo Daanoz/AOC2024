@@ -1,0 +1,12 @@
+[package]
+name = "aoc-core"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+repository.workspace = true
+license.workspace = true
+
+[dependencies]
+aoc-procmacro = { path = "../aoc-procmacro" }
+aoc-procmacro-internals = { path = "../aoc-procmacro-internals" }
+lazy_static = "1"

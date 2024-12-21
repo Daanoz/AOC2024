@@ -1,0 +1,18 @@
+[package]
+name = "aoc-procmacro"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+repository.workspace = true
+license.workspace = true
+
+[lib]
+proc-macro = true
+
+[dependencies]
+aoc-procmacro-internals = { path = "../aoc-procmacro-internals" }
+darling = "0.20.10"
+lazy_static = "1"
+syn = "2.0"
+proc-macro2 = "1.0"
+quote = "1.0"
