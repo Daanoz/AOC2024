@@ -44,11 +44,20 @@ pub(crate) fn aoc_puzzle_impl(args: TokenStream, input: TokenStream) -> TokenStr
     };
 
     let ident = &input.ident;
+    let can_render = args.render;
     let doc_text = puzzle_description.replace("```", "```text");
+
+    let render_support = if can_render {
+        quote! { use aoc_core::render::prelude::*; }
+    } else {
+        quote! {}
+    };
 
     let expanded = quote! {
         #[doc = #doc_text]
         #input
+
+        #render_support
 
         pub fn register_solution(solutions: &mut aoc_core::SolutionCollection) {
             let wrapper = aoc_core::SolutionWrapper::new(
@@ -56,6 +65,7 @@ pub(crate) fn aoc_puzzle_impl(args: TokenStream, input: TokenStream) -> TokenStr
                 aoc_core::SolutionProps {
                     day: #aoc_day,
                     year: #aoc_year,
+                    can_render: #can_render,
                 }
             );
 

@@ -8,6 +8,7 @@ license.workspace = true
 
 [dependencies]
 aoc-core = { path = "../aoc-core", default-features = false}
+aoc-bevy-render = { path = "../aoc-bevy-render", optional = true}
 clap = { version = "4.5.21", features = ["derive"] }
 lazy_static = "1"
 regex = "1"
@@ -18,6 +19,10 @@ criterion = { version = "0.4", features = ["html_reports"] }
 
 [build-dependencies]
 aoc-core = { path = "../aoc-core" }
+
+[features]
+default = []
+render = ["aoc-bevy-render", "aoc-core/render"]
 
 [[bench]]
 name = "benchmarks"

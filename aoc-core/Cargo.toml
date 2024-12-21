@@ -6,6 +6,10 @@ authors.workspace = true
 repository.workspace = true
 license.workspace = true
 
+[features]
+default = ["render"]
+render = []
+
 [dependencies]
 aoc-procmacro = { path = "../aoc-procmacro" }
 aoc-procmacro-internals = { path = "../aoc-procmacro-internals" }

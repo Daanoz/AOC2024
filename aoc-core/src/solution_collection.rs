@@ -1,14 +1,19 @@
-use crate::{Answer, RunnableSolution};
+use crate::{Answer, RenderPipeline, RunnableSolution};
 use std::{collections::HashMap, time::Duration};
 
 #[derive(Default)]
 pub struct SolutionCollection {
     solutions: HashMap<u32, Box<dyn RunnableSolution>>,
+    render_pipeline: Option<RenderPipeline>,
 }
 
 impl SolutionCollection {
     pub fn register_solution(&mut self, solution: Box<dyn RunnableSolution>) {
         self.solutions.insert(solution.get_day(), solution);
+    }
+
+    pub fn set_render_pipeline(&mut self, pipeline: RenderPipeline) {
+        self.render_pipeline = Some(pipeline);
     }
 
     pub fn run(&self, day: Option<u32>) {
@@ -45,14 +50,16 @@ impl SolutionCollection {
         time1 + time2
     }
 
-    pub fn run_day_part1(&self, day: &u32) -> (Answer, std::time::Duration) {
+    pub fn run_and_render_part1(&self, day: &u32) -> (Answer, std::time::Duration) {
         let solution = &self.solutions.get(day).unwrap();
-        let puzzle = solution.get_puzzle(); // Preload puzzle
+        let mut puzzle = solution.get_puzzle(); // Preload puzzle
+        puzzle.set_render_pipeline(self.render_pipeline.clone());
         crate::timed!(solution.part1(&puzzle))
     }
-    pub fn run_day_part2(&self, day: &u32) -> (Answer, std::time::Duration) {
+    pub fn run_and_render_part2(&self, day: &u32) -> (Answer, std::time::Duration) {
         let solution = &self.solutions.get(day).unwrap();
-        let puzzle = solution.get_puzzle(); // Preload puzzle
+        let mut puzzle = solution.get_puzzle(); // Preload puzzle
+        puzzle.set_render_pipeline(self.render_pipeline.clone());
         crate::timed!(solution.part2(&puzzle))
     }
 
@@ -71,6 +78,16 @@ impl SolutionCollection {
 
     pub fn get_days(&self) -> Vec<u32> {
         self.solutions.keys().copied().collect()
+	}
+
+    pub fn get_days_with_render(&self) -> Vec<(u32, bool)> {
+        let mut list = self
+            .solutions
+            .iter()
+            .map(|d| (*d.0, d.1.can_render()))
+            .collect::<Vec<_>>();
+        list.sort_by(|a, b| a.0.cmp(&b.0));
+        list
     }
 }
 

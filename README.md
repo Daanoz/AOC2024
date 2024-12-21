@@ -2,7 +2,7 @@
 
 Advent Of Code 2024, join the fun on the [Advent of code](http://adventofcode.com) website.
 
-The solutions of 2024 will be written in Rust. I will also be trying out to use proc_macro's to load puzzle data this might be a bit rough since it's the first time trying to implement these.
+The solutions of 2024 will be written in Rust. I will also be trying out to use proc_macro's to load puzzle data and Bevy for rendering puzzles, these might be a bit rough since it's the first time trying to implement these.
 
 ## How to run
 
@@ -16,6 +16,11 @@ cargo run --release
 A single day:
 ```
 cargo run --release -- --day 1
+```
+
+Start with bevy renderer:
+```
+cargo run --release --features render
 ```
 
 Run benchmarks:

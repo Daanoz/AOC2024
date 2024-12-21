@@ -4,12 +4,15 @@ use darling::FromMeta;
 #[darling(and_then = AocAttributes::autocorrect)]
 pub struct AocAttributes {
     pub day: Option<u32>,
+    #[darling(default)]
+    pub render: bool,
 }
 
 impl AocAttributes {
     fn autocorrect(self) -> darling::Result<Self> {
         Ok(Self {
             day: validate_day(self.day)?,
+            render: self.render,
         })
     }
 }

@@ -16,6 +16,13 @@ struct Args {
     day: Option<u32>,
 }
 
+#[cfg(feature = "render")]
+#[aoc_core::aoc(year = 2024)]
+fn main() {
+    aoc_bevy_render::run(solutions::get_collection());
+}
+
+#[cfg(not(feature = "render"))]
 #[aoc_core::aoc(year = 2024)]
 fn main() {
     let args = Args::parse();

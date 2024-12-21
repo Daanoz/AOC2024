@@ -1,6 +1,7 @@
 [workspace]
 resolver = "2"
 members = [
+    "aoc-bevy-render",
     "aoc-core",
     "aoc-procmacro",
     "aoc-procmacro-internals",
